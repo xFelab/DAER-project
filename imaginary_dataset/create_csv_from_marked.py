@@ -1,3 +1,13 @@
+"""
+this file:
+
+1 - reads an edited image from disk
+2 - searches all image looking for perfect red and blue pixels
+3 - saves a .csv to store the entrances (blue pixels)
+4 - saves a .csv to store the exits (red pixels)
+
+"""
+
 from __future__ import print_function
 import argparse
 import numpy as np
@@ -5,6 +15,7 @@ from matplotlib import pyplot as plt
 import cv2
 import csv
 
+# 1 - reads an image from disk
 image = cv2.imread('image_marked.png')
 image_mod = cv2.imread('image_marked.png')
 """ show the image with open cv
@@ -33,6 +44,7 @@ print ('the image is '+str(width)+' by '+str(height)+' pixels ')
 first_entrance_flag = 0
 first_exit_flag = 0
 
+# 2 - searches all image looking for perfect red and blue pixels
 for x in range(width): #print (x)
     for y in range(height): #print (y)
         (b, g, r) = image[y, x]
@@ -63,15 +75,19 @@ for x in range(width): #print (x)
             
 f.close()
 
-# write entrances to csv
+# 3 - saves a .csv to store the entrances (blue pixels)
 f = open('entrances.csv', 'w')
+np.savetxt(f, ['x', 'y'], newline=", ",  fmt="%s")
+f.write("\n")
 for x in range(len(entrances)):
     np.savetxt(f, entrances[x], newline=", ")
     f.write("\n")
 f.close()
 
-# write exits to csv
+# 4 - saves a .csv to store the exits (red pixels)
 f = open('exits.csv', 'w')
+np.savetxt(f, ['x', 'y'], newline=", ",  fmt="%s")
+f.write("\n")
 for x in range(len(exits)):
     np.savetxt(f, exits[x], newline=", ")
     f.write("\n")
