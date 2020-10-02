@@ -3,8 +3,6 @@
 ### artigos-material
 Material teórico relacionado ao assunto
 
-*yoloV1
-
 ### clusterization
 Códigos e implementação do processo de clusterização
 
